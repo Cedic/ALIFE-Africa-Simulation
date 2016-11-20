@@ -1,5 +1,6 @@
 # Import
 from random import randint
+import constants
 
 # Functions
 def dna_to_int(dna):
