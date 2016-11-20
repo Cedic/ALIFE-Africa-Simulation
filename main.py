@@ -78,7 +78,7 @@ def generar_suelo(tab):
 	suelo_tex = materials.texture(data=suelo_img)
 	suelo = box (pos=(MAT_SIZE*VCOEFF/2,MAT_SIZE*VCOEFF/2,0), 
 				 length=MAT_SIZE*VCOEFF + 10, height=MAT_SIZE*VCOEFF +10,
-				 width=10, material = suelo_tex)
+				 width=10, material = materials.marble, color = color.orange)
 
 	
 def printtab(tab):
