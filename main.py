@@ -10,6 +10,10 @@ MAT_SIZE = 40
 CENTROS_RECURSOS = [[2,38],[37,2]]
 VCOEFF = 10
 
+scene = display(title='Africa',
+     x=0, y=0, width=600, height=600,
+     center=(MAT_SIZE*VCOEFF/2, MAT_SIZE*VCOEFF/2,70), background=(0,0,0))
+
 
 # Func
 def generar_mat(size):
@@ -80,6 +84,7 @@ def generar_recursos(mat, puntos):
         
     return mat, dict_recursos
 
+
 def generar_suelo(tab):
 	suelo = box (pos=(MAT_SIZE*VCOEFF/2,MAT_SIZE*VCOEFF/2,-10), 
 				 length=MAT_SIZE*VCOEFF + 10, height=MAT_SIZE*VCOEFF +10,
@@ -104,5 +109,7 @@ def printtab(tab):
 matriz = generar_mat(MAT_SIZE)
 matriz, models_recursos = generar_recursos(matriz, CENTROS_RECURSOS)
 
+
 #~ printtab(matriz)
+print(models_recursos)
 generar_suelo(matrix)
