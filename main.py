@@ -2,10 +2,13 @@
 from random import random
 import matplotlib.pyplot as plt
 import numpy as np
+from visual import * 
+import Image
 
 # Constants
 MAT_SIZE = 40
 CENTROS_RECURSOS = [[2,38],[37,2]]
+VCOEFF = 10
 
 
 # Func
@@ -19,7 +22,7 @@ def generar_mat(size):
  
  
 def calc_cantidad(num):
-    if random() > 0.5:
+    if random.uniform(0,1) > 0.5:
         num *= 1.2
     else:
         num *= 0.8
@@ -49,15 +52,18 @@ def generar_recursos(mat, puntos):
             for j in range(y-1,y+2):
                 if [i,j] != [x,y]:
                     mat[i][j] = calc_cantidad(45)
+                    recurso_model = cylinder(pos=(i*VCOEFF,j*VCOEFF,0), axis=(0,0,45), radius=3, material = materials.wood)
         for i in range(x-2,x+3):
             for j in range(y-2,y+3):
                 if mat[i][j] == 0:
                     mat[i][j] = calc_cantidad(35)
+                    recurso_model = cylinder(pos=(i*VCOEFF,j*VCOEFF,0), axis=(0,0,35), radius=3, material = materials.wood)
         for i in range(x-3,x+4):
             for j in range(y-3,y+4):
                 if inmat(i,j,mat):
                     if mat[i][j] == 0:
                         mat[i][j] = calc_cantidad(20)
+                        recurso_model = cylinder(pos=(i*VCOEFF,j*VCOEFF,0), axis=(0,0,35), radius=3, material = materials.wood)
         for i in range(x-4,x+5):
             for j in range(y-4,y+5):
                 if inmat(i,j,mat):
@@ -67,24 +73,31 @@ def generar_recursos(mat, puntos):
         
     return mat
 
+def generar_suelo(tab):
+	suelo_img= Image.open('img/floor.jpg')  # size must be power of 2, ie 128 x 128
+	suelo_tex = materials.texture(data=suelo_img)
+	suelo = box (pos=(MAT_SIZE*VCOEFF/2,MAT_SIZE*VCOEFF/2,0), 
+				 length=MAT_SIZE*VCOEFF + 10, height=MAT_SIZE*VCOEFF +10,
+				 width=10, material = suelo_tex)
 
+	
 def printtab(tab):
-    # for i in range(len(tab)):
-    #     print("")
-    #     for j in range(len(tab[i])):
+	# for i in range(len(tab)):
+	#     print("")
+	#     for j in range(len(tab[i])):
     #         print(tab[i][j], end="")
     #         if tab[i][j] < 10:
     #             print(" ", end="")
     # print("")
 
     # Display
-    im = plt.imshow(tab, extent=[-1,1,-1,1], interpolation='none');
-    plt.xticks([]); plt.yticks([]);
-    plt.show()
+	im = plt.imshow(tab, extent=[-1,1,-1,1], interpolation='none');
+	plt.xticks([]); plt.yticks([]);
+	plt.show()
     
     
 matriz = generar_mat(MAT_SIZE)
 matriz = generar_recursos(matriz, CENTROS_RECURSOS)
 
-printtab(matriz)
-
+#~ printtab(matriz)
+generar_suelo(matrix)
