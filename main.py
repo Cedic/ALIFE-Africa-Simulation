@@ -99,14 +99,21 @@ def main():
 	
 	# Initialization of populations
 	popzebras = []
-	new_zebra = Zebra(random_dna())
-	popzebras.append(new_zebra)
-	
 	poptigers = []
+	
+	for i in range(15):
+		new_zebra = Zebra(random_dna())
+		popzebras.append(new_zebra)
+	for i in range(15):
+		new_tiger = Tiger(random_dna())
+		poptigers.append(new_tiger)
 	
 	while(1):
 		for zebra in popzebras:
 			zebra.move(matrix_ressources)
+			
+		for tiger in poptigers:
+			tiger.move(popzebras)
 			
 
 

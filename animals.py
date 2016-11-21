@@ -213,6 +213,7 @@ class Zebra(Animal):
 class Tiger(Animal):
     def __init__(self,dna):
         Animal.__init__(self,dna)
+        self.model.color=color.red
     
     def move(self, popzebras):
         # Look for point with most food
@@ -234,11 +235,14 @@ class Tiger(Animal):
 				self.move_model(1, 0)
 				self.pos[0] += 1
             if self.pos[0] > best_point[0]:
-                self.pos[0] -= 1
+				self.move_model(-1, 0)
+				self.pos[0] -= 1
             if self.pos[1] < best_point[1]:
-                self.pos[1] += 1
+				self.move_model(0, 1)
+				self.pos[1] += 1
             if self.pos[1] > best_point[1]:
-                self.pos[1] -= 1
+				self.move_model(0, -1)
+				self.pos[1] -= 1
             moved += 1
 
     def eat(self, popzebras):
