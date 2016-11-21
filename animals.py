@@ -1,6 +1,7 @@
 # Import
 from random import randint
 from constants import *
+from visual import * 
 import Image
 
 # Functions
@@ -8,58 +9,66 @@ def dna_to_int(dna):
     return int("".join(str(i) for i in dna), 2)
 
 
+def random_dna():
+	dna = []
+	for i in range(4):
+		dna.append(randint(0,1))
+	return dna
+
+
+	
 # Texture definition
 
 #~ tiger0000_img= Image.open('img/tiger0000.png')
-#~ tiger0000_tex = materials.texture(data=tiger0000_img)
+#~ tiger0000 = materials.texture(data=tiger0000_img)
 #~ 
 #~ tiger0001_img= Image.open('img/tiger0001.png')
-#~ tiger0001_tex = materials.texture(data=tiger0001_img)
+#~ tiger0001 = materials.texture(data=tiger0001_img)
 #~ 
 #~ tiger0002_img= Image.open('img/tiger0002.png')
-#~ tiger0002_tex = materials.texture(data=tiger0002_img)
+#~ tiger0002 = materials.texture(data=tiger0002_img)
 #~ 
 #~ tiger0003_img= Image.open('img/tiger0003.png')
-#~ tiger0003_tex = materials.texture(data=tiger0003_img)
+#~ tiger0003 = materials.texture(data=tiger0003_img)
 #~ 
 #~ tiger0004_img= Image.open('img/tiger0004.png')
-#~ tiger0004_tex = materials.texture(data=tiger0004_img)
+#~ tiger0004 = materials.texture(data=tiger0004_img)
 #~ 
 #~ tiger0005_img= Image.open('img/tiger0005.png')
-#~ tiger0005_tex = materials.texture(data=tiger0005_img)
+#~ tiger0005 = materials.texture(data=tiger0005_img)
 #~ 
 #~ tiger0006_img= Image.open('img/tiger0006.png')
-#~ tiger0006_tex = materials.texture(data=tiger0006_img)
+#~ tiger0006 = materials.texture(data=tiger0006_img)
 #~ 
 #~ tiger0007_img= Image.open('img/tiger0007.png')
-#~ tiger0007_tex = materials.texture(data=tiger0007_img)
+#~ tiger0007 = materials.texture(data=tiger0007_img)
 #~ 
 #~ tiger0008_img= Image.open('img/tiger0008.png')
-#~ tiger0008_tex = materials.texture(data=tiger0008_img)
+#~ tiger0008 = materials.texture(data=tiger0008_img)
 #~ 
 #~ tiger0009_img= Image.open('img/tiger0009.png')
-#~ tiger0009_tex = materials.texture(data=tiger0009_img)
+#~ tiger0009 = materials.texture(data=tiger0009_img)
 #~ 
 #~ tiger0010_img= Image.open('img/tiger0010.png')
-#~ tiger0010_tex = materials.texture(data=tiger0010_img)
+#~ tiger0010 = materials.texture(data=tiger0010_img)
 #~ 
 #~ tiger0011_img= Image.open('img/tiger011.png')
-#~ tiger0011_tex = materials.texture(data=tiger0011_img)
+#~ tiger0011 = materials.texture(data=tiger0011_img)
 #~ 
 #~ tiger0012_img= Image.open('img/tiger0012.png')
-#~ tiger0012_tex = materials.texture(data=tiger0012_img)
+#~ tiger0012 = materials.texture(data=tiger0012_img)
 #~ 
 #~ tiger0013_img= Image.open('img/tiger0013.png')
-#~ tiger0013_tex = materials.texture(data=tiger0013_img)
+#~ tiger0013 = materials.texture(data=tiger0013_img)
 #~ 
 #~ tiger0014_img= Image.open('img/tiger0014.png')
-#~ tiger0014_tex = materials.texture(data=tiger0014_img)
+#~ tiger0014 = materials.texture(data=tiger0014_img)
 #~ 
 #~ tiger0015_img= Image.open('img/tiger0015.png')
-#~ tiger0015_tex = materials.texture(data=tiger0015_img)
+#~ tiger0015 = materials.texture(data=tiger0015_img)
 #~ 
-#~ tiger0000_img= Image.open('img/tiger0000.png')
-#~ tiger0000_tex = materials.texture(data=tiger0000_img)
+#~ zebra0000_img= Image.open('img/zebra0000.png')
+#~ zebra0000_tex = materials.texture(data=zebra0000_img)
 #~ 
 #~ zebra0001_img= Image.open('img/zebra0001.png')
 #~ zebra0001_tex = materials.texture(data=zebra0001_img)
@@ -123,6 +132,7 @@ class Animal:
         self.vision = dnaint*2 + 1
         self.food_eaten = dnaint/2 + 1
         self.nrj_consum = float(dnaint)/4 + 1
+        self.model = sphere(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF,5), radius=VCOEFF/2)
 
     def alive(self):
         return self.nrj > 0
@@ -137,23 +147,22 @@ class Animal:
             else:
                 new_dna.append(animal2.dna[i])
         return new_dna
+        
+    def move_model(self, x, y):
+		for i in range(VCOEFF):
+			self.model.pos=(self.pos[0]+x, self.pos[1]+y, 5)
+			range(SIM_SPEED)
 
     def live(self):
         self.nrj -= self.nrj_consum
         self.nrj = min(self.nrj_max, self.nrj)
             
-        
-# For random dna:
-# self.dna = []
-# for i in range(4):
-#     self.dna.append(randint(0,1))
-
 ##############################################################################
 
 class Zebra(Animal):
-    def __init__(self):
-        Animal.__init__(self)
-        
+    def __init__(self,dna):
+        Animal.__init__(self,dna)
+        self.model.color =(color.blue)
     def move(self, mat):
         # Look for point with most food
         best_point = [-1,-1]
@@ -173,13 +182,18 @@ class Zebra(Animal):
         moved = 0
         while moved <= self.speed:
             if self.pos[0] < best_point[0]:
-                self.pos[0] += 1
+				self.move_model(1, 0)
+				self.pos[0] += 1
             if self.pos[0] > best_point[0]:
-                self.pos[0] -= 1
+				self.move_model(-1, 0)
+				self.pos[0] -= 1
             if self.pos[1] < best_point[1]:
-                self.pos[1] += 1
+				self.move_model(0, 1)
+				self.pos[1] += 1
             if self.pos[1] > best_point[1]:
-                self.pos[1] -= 1
+				self.move_model(0, -1)
+				self.pos[1] -= 1
+            self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
             moved += 1
 
     def eat(self, mat_food, mat_waste):
@@ -197,8 +211,8 @@ class Zebra(Animal):
 ##############################################################################
 
 class Tiger(Animal):
-    def __init__(self):
-        Animal.__init__(self)
+    def __init__(self,dna):
+        Animal.__init__(self,dna)
     
     def move(self, popzebras):
         # Look for point with most food
@@ -217,7 +231,8 @@ class Tiger(Animal):
         moved = 0
         while moved <= self.speed:
             if self.pos[0] < best_point[0]:
-                self.pos[0] += 1
+				self.move_model(1, 0)
+				self.pos[0] += 1
             if self.pos[0] > best_point[0]:
                 self.pos[0] -= 1
             if self.pos[1] < best_point[1]:
@@ -228,7 +243,7 @@ class Tiger(Animal):
 
     def eat(self, popzebras):
         for zeb in popzebras:
-            if self.pos == zen.pos:
+            if self.pos == zeb.pos:
                 zeb.die()
                 eaten = min(self.food_eaten, zeb.nrj)
                 zeb.nrj -= eaten

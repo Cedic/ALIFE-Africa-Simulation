@@ -83,19 +83,33 @@ def generate_floor():
 				 length=SIZE_AFRICA*VCOEFF + 10, height=SIZE_AFRICA*VCOEFF +10,
 				 width=10, material = materials.marble, color = color.orange)
 
-    
-scene = display(title='Africa',
-     x=0, y=0, width=600, height=600,
-     center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
-         
-matrix_ressources = generate_mat(SIZE_AFRICA)
-matrix_ressources, models_ressources = generate_ressources(matrix_ressources,
-													  RESSOURCES_CENTERS)
-													  
-matrix_pollution = generate_mat(SIZE_AFRICA)
+
+def main(): 
+	# 3D Scene for VPython   
+	scene = display(title='Africa',
+		 x=0, y=0, width=600, height=600,
+		 center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
+
+	# Initialization of the simulation field
+	matrix_ressources = generate_mat(SIZE_AFRICA)
+	matrix_ressources, models_ressources = generate_ressources(matrix_ressources,
+														  RESSOURCES_CENTERS)													  
+	matrix_pollution = generate_mat(SIZE_AFRICA)
+	generate_floor()
+	
+	# Initialization of populations
+	popzebras = []
+	new_zebra = Zebra(random_dna())
+	popzebras.append(new_zebra)
+	
+	poptigers = []
+	
+	while(1):
+		for zebra in popzebras:
+			zebra.move(matrix_ressources)
+			
 
 
+main()
 
-#~ printtab(matriz)
-print(models_ressources)
-generate_floor()
+
