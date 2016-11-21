@@ -5,6 +5,7 @@ import numpy as np
 from visual import * 
 from constants import *
 import Image
+from animals import *
 
 # Func
 def generate_mat(size):
