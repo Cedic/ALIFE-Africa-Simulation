@@ -1,6 +1,6 @@
 # Import
 from random import randint
-import constants
+from constants import *
 
 # Functions
 def dna_to_int(dna):
@@ -56,6 +56,8 @@ class Zebra(Animal):
                     best_point_quality = mat[i][j]
         # Move toward this point
         # TODO avoid 2 zebras in same point
+        # TODO flee tiger
+        # TODO flee waste
         if best_point == [-1,-1]:
             # Random move
             best_point= [randint(0,SIZE_AFRICA), randint(0,SIZE_AFRICA)]
@@ -79,5 +81,7 @@ class Zebra(Animal):
             mat_waste[i][j] -= eaten
             self.nrj += eaten
 
-# class Tiger(Animal):
+class Tiger(Animal):
+    def __init__(self):
+        Animal.__init__(self)
     
