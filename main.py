@@ -3,24 +3,24 @@ from random import random
 import matplotlib.pyplot as plt
 import numpy as np
 from visual import * 
+from constants import *
 import Image
 
+
 # Constants
-MAT_SIZE = 40
-CENTROS_RECURSOS = [[2,38],[37,2]]
-VCOEFF = 10
+
 
 scene = display(title='Africa',
      x=0, y=0, width=600, height=600,
-     center=(MAT_SIZE*VCOEFF/2, MAT_SIZE*VCOEFF/2,70), background=(0,0,0))
+     center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
 
 
 # Func
 def generar_mat(size):
     mat = []
-    for i in range(MAT_SIZE):
+    for i in range(SIZE_AFRICA):
         mat.append([0])
-        for j in range(MAT_SIZE):
+        for j in range(SIZE_AFRICA):
             mat[i].append(0)
     return mat
  
@@ -86,8 +86,8 @@ def generar_recursos(mat, puntos):
 
 
 def generar_suelo(tab):
-	suelo = box (pos=(MAT_SIZE*VCOEFF/2,MAT_SIZE*VCOEFF/2,-10), 
-				 length=MAT_SIZE*VCOEFF + 10, height=MAT_SIZE*VCOEFF +10,
+	suelo = box (pos=(SIZE_AFRICA*VCOEFF/2,SIZE_AFRICA*VCOEFF/2,-10), 
+				 length=SIZE_AFRICA*VCOEFF + 10, height=SIZE_AFRICA*VCOEFF +10,
 				 width=10, material = materials.marble, color = color.orange)
 
 	
@@ -106,7 +106,7 @@ def printtab(tab):
 	plt.show()
     
     
-matriz = generar_mat(MAT_SIZE)
+matriz = generar_mat(SIZE_AFRICA)
 matriz, models_recursos = generar_recursos(matriz, CENTROS_RECURSOS)
 
 
