@@ -167,11 +167,13 @@ class Zebra(Animal):
         # Look for point with most food
         best_point = [-1,-1]
         best_point_quality = 0
-        for i in range(self.pos[0]-self.vision, self.pos[0]-self.vision):
-            for j in range(self.pos[1]-self.vision, self.pos[1]-self.vision):
-                if mat[i][j] > best_point_quality:
-                    best_point = [i,j]
-                    best_point_quality = mat[i][j]
+        for i in range(self.pos[0]-self.vision, self.pos[0]+self.vision):
+            for j in range(self.pos[1]-self.vision, self.pos[1]+self.vision):
+                if i >= 0 and i < SIZE_AFRICA and \
+                   j >= 0 and j < SIZE_AFRICA:
+                    if mat[i][j] > best_point_quality:
+                        best_point = [i,j]
+                        best_point_quality = mat[i][j]
         # Move toward this point
         # TODO avoid 2 zebras in same point
         # TODO flee tiger
@@ -182,13 +184,13 @@ class Zebra(Animal):
         moved = 0
         while moved <= self.speed:
             if self.pos[0] < best_point[0]:
-				self.move_model(1, 0)
+				self.move_model(+1, 0)
 				self.pos[0] += 1
             if self.pos[0] > best_point[0]:
 				self.move_model(-1, 0)
 				self.pos[0] -= 1
             if self.pos[1] < best_point[1]:
-				self.move_model(0, 1)
+				self.move_model(0, +1)
 				self.pos[1] += 1
             if self.pos[1] > best_point[1]:
 				self.move_model(0, -1)
@@ -218,8 +220,8 @@ class Tiger(Animal):
     def move(self, popzebras):
         # Look for point with most food
         best_point = [-1,-1]
-        for i in range(self.pos[0]-self.vision, self.pos[0]-self.vision):
-            for j in range(self.pos[1]-self.vision, self.pos[1]-self.vision):
+        for i in range(self.pos[0]-self.vision, self.pos[0]+self.vision):
+            for j in range(self.pos[1]-self.vision, self.pos[1]+self.vision):
                 for zeb in popzebras:
                     if [i, j] == zeb.pos:
                         best_point = [i,j]
