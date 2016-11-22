@@ -126,12 +126,15 @@ class Animal:
         self.pos = [randint(0,SIZE_AFRICA), randint(0,SIZE_AFRICA)]
         self.nrj_max = 99
         self.nrj = self.nrj_max/2
+        self.life_expect = 1000000 + randint(-200,200)
 
         dnaint = dna_to_int(self.dna)
         self.speed = dnaint + 1
         self.vision = dnaint*2 + 1
         self.food_eaten = dnaint/2 + 1
         self.nrj_consum = float(dnaint)/4 + 1
+
+        # Graphic model
         self.model = sphere(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF,5), radius=VCOEFF/2)
 
     def alive(self):
@@ -156,6 +159,14 @@ class Animal:
     def live(self):
         self.nrj -= self.nrj_consum
         self.nrj = min(self.nrj_max, self.nrj)
+        self.life_expect -= 1
+        if self.nrj < 0 or self.life_expect < 0:
+            self.die()
+
+    
+    def is_dead(self):
+        return self.speed <= 0
+
             
 ##############################################################################
 
@@ -228,12 +239,13 @@ class Zebra(Animal):
             if mat_food[i][j] <= 0:
 				dict_resources[(i, j)].visible = False
 				del dict_resources[(i, j)]
-				
-				
 
     def die(self):
         # When a zebra dies, it stops moving but stays as food for tigers
-        self.speed = 0
+        self.speed = -1
+        self.model.color = color.black
+				
+				
 
 ##############################################################################
 
@@ -298,3 +310,11 @@ class Tiger(Animal):
                 zeb.nrj -= eaten
                 self.nrj += eaten
                 break;
+
+
+    def die(self):
+        # TODO When a tiger dies, transform in waste
+        self.speed = -1
+        self.model.visible = False
+        del self.model
+
