@@ -130,7 +130,8 @@ def main():
                         tiger.live()
 
                         if tiger.is_dead():
-                            poptigers.remove(tiger)
+							print "Snif snif, a tiger is dead"
+							poptigers.remove(tiger)
 			
 		print nb_alive_zebras, 'zebras alive'
 		print len(poptigers), 'tigers alive'

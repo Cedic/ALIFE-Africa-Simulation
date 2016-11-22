@@ -17,103 +17,131 @@ def random_dna():
 
 
 	
-# Texture definition
+#~ # Texture definition
+ #~ 
+tiger1_img= Image.open('img/tiger1.png')
+tiger1 = materials.texture(data=tiger1_img)
 
-#~ tiger0000_img= Image.open('img/tiger0000.png')
-#~ tiger0000 = materials.texture(data=tiger0000_img)
-#~ 
-#~ tiger0001_img= Image.open('img/tiger0001.png')
-#~ tiger0001 = materials.texture(data=tiger0001_img)
-#~ 
-#~ tiger0002_img= Image.open('img/tiger0002.png')
-#~ tiger0002 = materials.texture(data=tiger0002_img)
-#~ 
-#~ tiger0003_img= Image.open('img/tiger0003.png')
-#~ tiger0003 = materials.texture(data=tiger0003_img)
-#~ 
-#~ tiger0004_img= Image.open('img/tiger0004.png')
-#~ tiger0004 = materials.texture(data=tiger0004_img)
-#~ 
-#~ tiger0005_img= Image.open('img/tiger0005.png')
-#~ tiger0005 = materials.texture(data=tiger0005_img)
-#~ 
-#~ tiger0006_img= Image.open('img/tiger0006.png')
-#~ tiger0006 = materials.texture(data=tiger0006_img)
-#~ 
-#~ tiger0007_img= Image.open('img/tiger0007.png')
-#~ tiger0007 = materials.texture(data=tiger0007_img)
-#~ 
-#~ tiger0008_img= Image.open('img/tiger0008.png')
-#~ tiger0008 = materials.texture(data=tiger0008_img)
-#~ 
-#~ tiger0009_img= Image.open('img/tiger0009.png')
-#~ tiger0009 = materials.texture(data=tiger0009_img)
-#~ 
-#~ tiger0010_img= Image.open('img/tiger0010.png')
-#~ tiger0010 = materials.texture(data=tiger0010_img)
-#~ 
-#~ tiger0011_img= Image.open('img/tiger011.png')
-#~ tiger0011 = materials.texture(data=tiger0011_img)
-#~ 
-#~ tiger0012_img= Image.open('img/tiger0012.png')
-#~ tiger0012 = materials.texture(data=tiger0012_img)
-#~ 
-#~ tiger0013_img= Image.open('img/tiger0013.png')
-#~ tiger0013 = materials.texture(data=tiger0013_img)
-#~ 
-#~ tiger0014_img= Image.open('img/tiger0014.png')
-#~ tiger0014 = materials.texture(data=tiger0014_img)
-#~ 
-#~ tiger0015_img= Image.open('img/tiger0015.png')
-#~ tiger0015 = materials.texture(data=tiger0015_img)
-#~ 
-#~ zebra0000_img= Image.open('img/zebra0000.png')
-#~ zebra0000_tex = materials.texture(data=zebra0000_img)
-#~ 
-#~ zebra0001_img= Image.open('img/zebra0001.png')
-#~ zebra0001_tex = materials.texture(data=zebra0001_img)
-#~ 
-#~ zebra0002_img= Image.open('img/zebra0002.png')
-#~ zebra0002_tex = materials.texture(data=zebra0002_img)
-#~ 
-#~ zebra0003_img= Image.open('img/zebra0003.png')
-#~ zebra0003_tex = materials.texture(data=zebra0003_img)
-#~ 
-#~ zebra0004_img= Image.open('img/zebra0004.png')
-#~ zebra0004_tex = materials.texture(data=zebra0004_img)
-#~ 
-#~ zebra0005_img= Image.open('img/zebra0005.png')
-#~ zebra0005_tex = materials.texture(data=zebra0005_img)
-#~ 
-#~ zebra0006_img= Image.open('img/zebra0006.png')
-#~ zebra0006_tex = materials.texture(data=zebra0006_img)
-#~ 
-#~ zebra0007_img= Image.open('img/zebra0007.png')
-#~ zebra0007_tex = materials.texture(data=zebra0007_img)
-#~ 
-#~ zebra0008_img= Image.open('img/zebra0008.png')
-#~ zebra0008_tex = materials.texture(data=zebra0008_img)
-#~ 
-#~ zebra0009_img= Image.open('img/zebra0009.png')
-#~ zebra0009_tex = materials.texture(data=zebra0009_img)
-#~ 
-#~ zebra0010_img= Image.open('img/zebra0010.png')
-#~ zebra0010_tex = materials.texture(data=zebra0010_img)
-#~ 
-#~ zebra0011_img= Image.open('img/zebra011.png')
-#~ zebra0011_tex = materials.texture(data=zebra0011_img)
-#~ 
-#~ zebra0012_img= Image.open('img/zebra0012.png')
-#~ zebra0012_tex = materials.texture(data=zebra0012_img)
-#~ 
-#~ zebra0013_img= Image.open('img/zebra0013.png')
-#~ zebra0013_tex = materials.texture(data=zebra0013_img)
-#~ 
-#~ zebra0014_img= Image.open('img/zebra0014.png')
-#~ zebra0014_tex = materials.texture(data=zebra0014_img)
-#~ 
-#~ zebra0015_img= Image.open('img/zebra0015.png')
-#~ zebra0015_tex = materials.texture(data=zebra0015_img)
+tiger2_img= Image.open('img/tiger2.png')
+tiger2 = materials.texture(data=tiger2_img)
+
+tiger3_img= Image.open('img/tiger3.png')
+tiger3 = materials.texture(data=tiger3_img)
+
+tiger4_img= Image.open('img/tiger4.png')
+tiger4 = materials.texture(data=tiger4_img)
+
+tiger5_img= Image.open('img/tiger5.png')
+tiger5 = materials.texture(data=tiger5_img)
+
+tiger6_img= Image.open('img/tiger6.png')
+tiger6 = materials.texture(data=tiger6_img)
+
+tiger7_img= Image.open('img/tiger7.png')
+tiger7 = materials.texture(data=tiger7_img)
+
+tiger8_img= Image.open('img/tiger8.png')
+tiger8 = materials.texture(data=tiger8_img)
+
+tiger9_img= Image.open('img/tiger9.png')
+tiger9 = materials.texture(data=tiger9_img)
+
+tiger10_img= Image.open('img/tiger10.png')
+tiger10 = materials.texture(data=tiger10_img)
+
+tiger11_img= Image.open('img/tiger11.png')
+tiger11 = materials.texture(data=tiger11_img)
+
+tiger12_img= Image.open('img/tiger12.png')
+tiger12 = materials.texture(data=tiger12_img)
+
+tiger13_img= Image.open('img/tiger13.png')
+tiger13 = materials.texture(data=tiger13_img)
+
+tiger14_img= Image.open('img/tiger14.png')
+tiger14 = materials.texture(data=tiger14_img)
+
+tiger15_img= Image.open('img/tiger15.png')
+tiger15 = materials.texture(data=tiger15_img)
+
+zebra1_img= Image.open('img/zebra1.png')
+zebra1_tex = materials.texture(data=zebra1_img)
+
+zebra2_img= Image.open('img/zebra2.png')
+zebra2_tex = materials.texture(data=zebra2_img)
+
+zebra3_img= Image.open('img/zebra3.png')
+zebra3_tex = materials.texture(data=zebra3_img)
+
+zebra4_img= Image.open('img/zebra4.png')
+zebra4_tex = materials.texture(data=zebra4_img)
+
+zebra5_img= Image.open('img/zebra5.png')
+zebra5_tex = materials.texture(data=zebra5_img)
+
+zebra6_img= Image.open('img/zebra6.png')
+zebra6_tex = materials.texture(data=zebra6_img)
+
+zebra7_img= Image.open('img/zebra7.png')
+zebra7_tex = materials.texture(data=zebra7_img)
+
+zebra8_img= Image.open('img/zebra8.png')
+zebra8_tex = materials.texture(data=zebra8_img)
+
+zebra9_img= Image.open('img/zebra9.png')
+zebra9_tex = materials.texture(data=zebra9_img)
+
+zebra10_img= Image.open('img/zebra10.png')
+zebra10_tex = materials.texture(data=zebra10_img)
+
+zebra11_img= Image.open('img/zebra11.png')
+zebra11_tex = materials.texture(data=zebra11_img)
+
+zebra12_img= Image.open('img/zebra12.png')
+zebra12_tex = materials.texture(data=zebra12_img)
+
+zebra13_img= Image.open('img/zebra13.png')
+zebra13_tex = materials.texture(data=zebra13_img)
+
+zebra14_img= Image.open('img/zebra14.png')
+zebra14_tex = materials.texture(data=zebra14_img)
+
+zebra15_img= Image.open('img/zebra15.png')
+zebra15_tex = materials.texture(data=zebra15_img)
+
+textures_zebra = {}
+textures_zebra[1] = zebra1_tex
+textures_zebra[2] = zebra2_tex
+textures_zebra[3] = zebra3_tex
+textures_zebra[4] = zebra4_tex
+textures_zebra[5] = zebra5_tex
+textures_zebra[6] = zebra6_tex
+textures_zebra[7] = zebra7_tex
+textures_zebra[8] = zebra8_tex
+textures_zebra[9] = zebra9_tex
+textures_zebra[10] = zebra10_tex
+textures_zebra[11] = zebra11_tex
+textures_zebra[12] = zebra12_tex
+textures_zebra[13] = zebra13_tex
+textures_zebra[14] = zebra14_tex
+textures_zebra[15] = zebra15_tex
+
+textures_tiger = {}
+textures_tiger[1] = tiger1_tex
+textures_tiger[2] = tiger2_tex
+textures_tiger[3] = tiger3_tex
+textures_tiger[4] = tiger4_tex
+textures_tiger[5] = tiger5_tex
+textures_tiger[6] = tiger6_tex
+textures_tiger[7] = tiger7_tex
+textures_tiger[8] = tiger8_tex
+textures_tiger[9] = tiger9_tex
+textures_tiger[10] = tiger10_tex
+textures_tiger[11] = tiger11_tex
+textures_tiger[12] = tiger12_tex
+textures_tiger[13] = tiger13_tex
+textures_tiger[14] = tiger14_tex
+textures_tiger[15] = tiger15_tex
 
 ##############################################################################
 
