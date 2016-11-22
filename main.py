@@ -89,6 +89,7 @@ def main():
 	scene = display(title='Africa',
 		 x=0, y=0, width=600, height=600,
 		 center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
+	
 
 	# Initialization of the simulation field
 	matrix_resources = generate_mat(SIZE_AFRICA)
@@ -106,11 +107,13 @@ def main():
 	for i in range(15):
 		new_tiger = Tiger(random_dna())
 		poptigers.append(new_tiger)
-
-        iter_nb = 0
+	
+	count_iteration = 1
 	while(1):
-                # iter_nb += 1
-                # print iter_nb
+		print '################### ITERATION ', count_iteration, ' ########################'
+		count_iteration += 1
+		print len(popzebras), 'zebras alive'
+		print len(poptigers), 'tigers alive' 
 		for zebra in popzebras:
 			zebra.move(matrix_resources, popzebras)
 			zebra.eat(matrix_resources, matrix_waste, models_resources)
