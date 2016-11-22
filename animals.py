@@ -205,7 +205,11 @@ class Zebra(Animal):
             mat_food[i][j] -= eaten
             mat_waste[i][j] += eaten
             self.nrj += eaten
-            dict_resources[(self.pos[0], self.pos[1])].axis -= (0,0,eaten)
+            dict_resources[(i, j)].axis -= (0,0,eaten)
+            if mat_food[i][j] <= 0:
+				dict_resources[(i, j)].visible = False
+				del dict_resources[(i, j)]
+				
 				
 
     def die(self):
