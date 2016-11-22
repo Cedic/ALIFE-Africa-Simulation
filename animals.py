@@ -228,6 +228,7 @@ class Tiger(Animal):
                         break
         # Move toward this point
         # TODO avoid 2 tigers in same point
+        # TODO if several zebras in sigth, choose one randomly (or closest)
         if best_point == [-1,-1]:
             # Random move
             best_point= [randint(0,SIZE_AFRICA), randint(0,SIZE_AFRICA)]
@@ -245,6 +246,7 @@ class Tiger(Animal):
             if self.pos[1] > best_point[1]:
 				self.move_model(0, -1)
 				self.pos[1] -= 1
+            self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
             moved += 1
 
     def eat(self, popzebras):
