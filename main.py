@@ -118,6 +118,8 @@ def main():
 			zebra.move(matrix_resources, popzebras)
 			zebra.eat(matrix_resources, matrix_waste, models_resources)
                         zebra.live()
+                        if zebra.clean():
+                            popzebras.remove(zebra)
 			
 		for tiger in poptigers:
 			tiger.move(popzebras, poptigers)

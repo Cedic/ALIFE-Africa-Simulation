@@ -124,9 +124,9 @@ class Animal:
         self.dna = dna
 
         self.pos = [randint(0,SIZE_AFRICA), randint(0,SIZE_AFRICA)]
-        self.nrj_max = 99
+        self.nrj_max = 500 + randint(-100,100)
         self.nrj = self.nrj_max/2
-        self.life_expect = 1000000 + randint(-200,200)
+        self.life_expect = 1000 + randint(-200,200)
 
         dnaint = dna_to_int(self.dna)
         self.speed = dnaint + 1
@@ -162,10 +162,15 @@ class Animal:
         self.life_expect -= 1
         if self.nrj < 0 or self.life_expect < 0:
             self.die()
-
     
     def is_dead(self):
         return self.speed <= 0
+
+    def disappear(self):
+        self.model.visible = False
+        del self.model
+
+        
 
             
 ##############################################################################
@@ -244,7 +249,13 @@ class Zebra(Animal):
         # When a zebra dies, it stops moving but stays as food for tigers
         self.speed = -1
         self.model.color = color.black
-				
+        self.nrj = 10
+
+    def clean(self):
+        # TODO find better name
+        if self.nrj <= 0:
+            self.disappear()
+            return True
 				
 
 ##############################################################################
@@ -315,6 +326,4 @@ class Tiger(Animal):
     def die(self):
         # TODO When a tiger dies, transform in waste
         self.speed = -1
-        self.model.visible = False
-        del self.model
-
+        self.disappear()
