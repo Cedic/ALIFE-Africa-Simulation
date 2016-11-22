@@ -110,17 +110,19 @@ def main():
 	
 	count_iteration = 1
 	while(1):
-		print '################### ITERATION ', count_iteration, ' ########################'
+		print '################### ITERATION ', count_iteration, \
+                    ' ########################'
 		count_iteration += 1
-		print len(popzebras), 'zebras alive'
-		print len(poptigers), 'tigers alive' 
+		nb_alive_zebras = len(popzebras)
 		for zebra in popzebras:
 			zebra.move(matrix_resources, popzebras)
 			zebra.eat(matrix_resources, matrix_waste, models_resources)
 			zebra.live()
 			if zebra.clean():
-				print "Snif snif, a zebra is dead"
 				popzebras.remove(zebra)
+			if zebra.is_dead:
+				nb_alive_zebras -= 1
+                           
 			
 		for tiger in poptigers:
 			tiger.move(popzebras, poptigers)
@@ -129,8 +131,11 @@ def main():
 			if tiger.is_dead():
 				print "Snif snif, a tiger is dead"
 				poptigers.remove(tiger)
-			
 
+			
+		print nb_alive_zebras, 'zebras alive'
+		print len(poptigers), 'tigers alive'
+ 
 
 main()
 
