@@ -38,44 +38,44 @@ def inmat(i,j,mat):
         return True   
         
     
-def generate_a_ressource(mat, x, y, n, dict_ressources):
+def generate_a_resource(mat, x, y, n, dict_resources):
 	
 	mat[x][y] = calc_quantity(n)
-	ressource_model = cylinder(pos=(x*VCOEFF,y*VCOEFF,0), axis=(0,0,n),
+	resource_model = cylinder(pos=(x*VCOEFF,y*VCOEFF,0), axis=(0,0,n),
 							 radius=3, material = materials.wood)
-	dict_ressources[(x,y)] = ressource_model
+	dict_resources[(x,y)] = resource_model
 	return mat
 	
 	
-def generate_ressources(mat, puntos):
+def generate_resources(mat, puntos):
 
-    dict_ressources = {}
+    dict_resources = {}
 	
     for pt in puntos:
         x = pt[0]
         y = pt[1]
-        mat = generate_a_ressource(mat, x, y, 50, dict_ressources)
+        mat = generate_a_resource(mat, x, y, 50, dict_resources)
         for i in range(x-1,x+2):
             for j in range(y-1,y+2):
                 if [i,j] != [x,y]:
-					mat = generate_a_ressource(mat, i, j, 45, dict_ressources)
+					mat = generate_a_resource(mat, i, j, 45, dict_resources)
         for i in range(x-2,x+3):
             for j in range(y-2,y+3):
                 if mat[i][j] == 0:
-                    mat = generate_a_ressource(mat, i, j, 35, dict_ressources)
+                    mat = generate_a_resource(mat, i, j, 35, dict_resources)
         for i in range(x-3,x+4):
             for j in range(y-3,y+4):
                 if inmat(i,j,mat):
                     if mat[i][j] == 0:
-                        mat = generate_a_ressource(mat, i, j, 20, dict_ressources)
+                        mat = generate_a_resource(mat, i, j, 20, dict_resources)
         for i in range(x-4,x+5):
             for j in range(y-4,y+5):
                 if inmat(i,j,mat):
                     if mat[i][j] == 0:
-                        mat = generate_a_ressource(mat, i, j, 5, dict_ressources)
+                        mat = generate_a_resource(mat, i, j, 5, dict_resources)
 
         
-    return mat, dict_ressources
+    return mat, dict_resources
 
 
 def generate_floor():
@@ -91,10 +91,9 @@ def main():
 		 center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
 
 	# Initialization of the simulation field
-	matrix_ressources = generate_mat(SIZE_AFRICA)
-	matrix_ressources, models_ressources = generate_ressources(matrix_ressources,
-														  RESSOURCES_CENTERS)													  
-	matrix_pollution = generate_mat(SIZE_AFRICA)
+	matrix_resources = generate_mat(SIZE_AFRICA)
+	matrix_resources, models_resources = generate_resources(matrix_resources, RESOURCES_CENTERS)													  
+	matrix_waste = generate_mat(SIZE_AFRICA)
 	generate_floor()
 	
 	# Initialization of populations
@@ -110,10 +109,12 @@ def main():
 	
 	while(1):
 		for zebra in popzebras:
-			zebra.move(matrix_ressources)
+			zebra.move(matrix_resources)
+			zebra.eat(matrix_resources, matrix_waste, models_resources)
 			
 		for tiger in poptigers:
 			tiger.move(popzebras)
+			tiger.eat(popzebras)
 			
 
 

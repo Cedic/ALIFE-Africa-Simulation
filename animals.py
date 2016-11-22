@@ -198,13 +198,15 @@ class Zebra(Animal):
             self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
             moved += 1
 
-    def eat(self, mat_food, mat_waste):
-        i, j = self.pos[0], self.pos[0]
+    def eat(self, mat_food, mat_waste, dict_resources):
+        i, j = self.pos[0], self.pos[1]
         if mat_food[i][j] > 0:
             eaten = min(mat_food[i][j], self.food_eaten)
             mat_food[i][j] -= eaten
-            mat_waste[i][j] -= eaten
+            mat_waste[i][j] += eaten
             self.nrj += eaten
+            dict_resources[(self.pos[0], self.pos[1])].axis -= (0,0,eaten)
+				
 
     def die(self):
         # When a zebra dies, it stops moving but stays as food for tigers
@@ -255,4 +257,5 @@ class Tiger(Animal):
                 zeb.die()
                 eaten = min(self.food_eaten, zeb.nrj)
                 zeb.nrj -= eaten
-                self.nrj += eaten 
+                self.nrj += eaten
+                break;
