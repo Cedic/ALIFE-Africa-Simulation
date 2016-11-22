@@ -124,9 +124,9 @@ class Animal:
         self.dna = dna
 
         self.pos = [randint(0,SIZE_AFRICA), randint(0,SIZE_AFRICA)]
-        self.nrj_max = 500 + randint(-100,100)
+        self.nrj_max = 250 + randint(-50,50)
         self.nrj = self.nrj_max/2
-        self.life_expect = 1000 + randint(-200,200)
+        self.life_expect = 1000 + randint(-200,200) # In number of iterations
 
         dnaint = dna_to_int(self.dna)
         self.speed = dnaint + 1
@@ -160,7 +160,7 @@ class Animal:
         self.nrj -= self.nrj_consum
         self.nrj = min(self.nrj_max, self.nrj)
         self.life_expect -= 1
-        if self.nrj < 0 or self.life_expect < 0:
+        if self.nrj <= 0 or self.life_expect <= 0:
             self.die()
     
     def is_dead(self):
@@ -326,4 +326,5 @@ class Tiger(Animal):
     def die(self):
         # TODO When a tiger dies, transform in waste
         self.speed = -1
+        self.nrj = -1
         self.disappear()
