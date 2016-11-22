@@ -115,11 +115,11 @@ def main():
 		print len(popzebras), 'zebras alive'
 		print len(poptigers), 'tigers alive' 
 		for zebra in popzebras:
-			zebra.move(matrix_resources)
+			zebra.move(matrix_resources, popzebras)
 			zebra.eat(matrix_resources, matrix_waste, models_resources)
 			
 		for tiger in poptigers:
-			tiger.move(popzebras)
+			tiger.move(popzebras, poptigers)
 			tiger.eat(popzebras)
 			
 

@@ -163,7 +163,8 @@ class Zebra(Animal):
     def __init__(self,dna):
         Animal.__init__(self,dna)
         self.model.color =(color.blue)
-    def move(self, mat):
+        
+    def move(self, mat, popzebras):
         # Look for point with most food
         best_point = [-1,-1]
         best_point_quality = 0
@@ -175,7 +176,6 @@ class Zebra(Animal):
                         best_point = [i,j]
                         best_point_quality = mat[i][j]
         # Move toward this point
-        # TODO avoid 2 zebras in same point
         # TODO flee tiger
         # TODO flee waste
         if best_point == [-1,-1]:
@@ -197,6 +197,25 @@ class Zebra(Animal):
 				self.pos[1] -= 1
             self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
             moved += 1
+
+        # Stay in an empty space
+        while self.is_alone(popzebras) == False:
+            movx = randint(-1,1) # Random move between -1, 0, or 1
+            movy = randint(-1,1)
+            self.pos[0] += movx
+            self.pos[1] += movy
+            self.move_model(movx, movy)
+            self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
+            
+
+    def is_alone(self, popzebras):
+        samepos = 0
+        for zeb in popzebras:
+            if self.pos == zeb.pos:
+                samepos +=1
+        return True if samepos == 1 else False
+                    
+        
 
     def eat(self, mat_food, mat_waste, dict_resources):
         i, j = self.pos[0], self.pos[1]
@@ -223,7 +242,7 @@ class Tiger(Animal):
         Animal.__init__(self,dna)
         self.model.color=color.red
     
-    def move(self, popzebras):
+    def move(self, popzebras, poptigers):
         # Look for point with most food
         best_point = [-1,-1]
         for i in range(self.pos[0]-self.vision, self.pos[0]+self.vision):
@@ -233,7 +252,6 @@ class Tiger(Animal):
                         best_point = [i,j]
                         break
         # Move toward this point
-        # TODO avoid 2 tigers in same point
         # TODO if several zebras in sigth, choose one randomly (or closest)
         if best_point == [-1,-1]:
             # Random move
@@ -254,6 +272,23 @@ class Tiger(Animal):
 				self.pos[1] -= 1
             self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
             moved += 1
+
+        # Stay in an empty space
+        while self.is_alone(poptigers) == False:
+            movx = randint(-1,1) # Random move between -1, 0, or 1
+            movy = randint(-1,1)
+            self.pos[0] += movx
+            self.pos[1] += movy
+            self.move_model(movx, movy)
+            self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
+
+    def is_alone(self, poptigers):
+        samepos = 0
+        for tig in poptigers:
+            if self.pos == tig.pos:
+                samepos +=1
+        return True if samepos == 1 else False
+
 
     def eat(self, popzebras):
         for zeb in popzebras:
