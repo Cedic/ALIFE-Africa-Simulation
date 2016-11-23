@@ -26,31 +26,30 @@ def calc_quantity(num):
     
     
 def inmat(i,j,mat):
-    # print(i,j)
-    if i < 0 or i >= len(mat):
-        # print("False")
-        return False
-    elif j < 0 or j >= len(mat[0]):
-        # print("False")
-        return False
-    else:
-        # print("True")
-        return True   
+	# print(i,j)
+	if i < 0 or i >= len(mat):
+		# print("False")
+		return False
+	elif j < 0 or j >= len(mat[0]):
+		# print("False")
+		return False
+	else:
+		# print("True")
+		return True   
         
     
 def generate_a_resource(mat, x, y, n, dict_resources):
 	
-	mat[x][y] = calc_quantity(n)
-	resource_model = cylinder(pos=(x*VCOEFF,y*VCOEFF,0), axis=(0,0,n),
-							 radius=3, material = materials.wood)
-	dict_resources[(x,y)] = resource_model
-	return mat
+    mat[x][y] = calc_quantity(n)
+    resource_model = cylinder(pos=(x*VCOEFF,y*VCOEFF,0), axis=(0,0,n),
+                              radius=3, material = materials.wood)
+    dict_resources[(x,y)] = resource_model
+    return mat
 	
 	
 def generate_resources(mat, puntos):
 
     dict_resources = {}
-	
     for pt in puntos:
         x = pt[0]
         y = pt[1]
@@ -58,7 +57,7 @@ def generate_resources(mat, puntos):
         for i in range(x-1,x+2):
             for j in range(y-1,y+2):
                 if [i,j] != [x,y]:
-					mat = generate_a_resource(mat, i, j, 45, dict_resources)
+                    mat = generate_a_resource(mat, i, j, 45, dict_resources)
         for i in range(x-2,x+3):
             for j in range(y-2,y+3):
                 if mat[i][j] == 0:
@@ -74,67 +73,64 @@ def generate_resources(mat, puntos):
                     if mat[i][j] == 0:
                         mat = generate_a_resource(mat, i, j, 5, dict_resources)
 
-        
     return mat, dict_resources
 
 
 def generate_floor():
-	floor = box (pos=(SIZE_AFRICA*VCOEFF/2,SIZE_AFRICA*VCOEFF/2,-10), 
-				 length=SIZE_AFRICA*VCOEFF + 10, height=SIZE_AFRICA*VCOEFF +10,
-				 width=10, material = materials.marble, color = color.orange)
+    floor = box (pos=(SIZE_AFRICA*VCOEFF/2,SIZE_AFRICA*VCOEFF/2,-10), 
+                 length=SIZE_AFRICA*VCOEFF + 10, height=SIZE_AFRICA*VCOEFF +10,
+                 width=10, material = materials.marble, color = color.orange)
 
 
 def main(): 
-	# 3D Scene for VPython   
-	scene = display(title='Africa',
-		 x=0, y=0, width=600, height=600,
-		 center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
+    # 3D Scene for VPython   
+    scene = display(title='Africa',
+                    x=0, y=0, width=600, height=600,
+                    center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
 	
 
 	# Initialization of the simulation field
-	matrix_resources = generate_mat(SIZE_AFRICA)
-	matrix_resources, models_resources = generate_resources(matrix_resources, RESOURCES_CENTERS)													  
-	matrix_waste = generate_mat(SIZE_AFRICA)
-	generate_floor()
+    matrix_resources = generate_mat(SIZE_AFRICA)
+    matrix_resources, models_resources = generate_resources(matrix_resources, RESOURCES_CENTERS)													  
+    matrix_waste = generate_mat(SIZE_AFRICA)
+    generate_floor()
 	
 	# Initialization of populations
-	popzebras = []
-	poptigers = []
+    popzebras = []
+    poptigers = []
 	
-	for i in range(15):
-		new_zebra = Zebra(random_dna())
-		popzebras.append(new_zebra)
-	for i in range(15):
-		new_tiger = Tiger(random_dna())
-		poptigers.append(new_tiger)
+    for i in range(15):
+        new_zebra = Zebra(random_dna())
+        popzebras.append(new_zebra)
+    for i in range(15):
+        new_tiger = Tiger(random_dna())
+        poptigers.append(new_tiger)
 	
-	count_iteration = 1
-	while(1):
-		print '################### ITERATION ', count_iteration, \
-                    ' ########################'
-		count_iteration += 1
-		nb_alive_zebras = len(popzebras)
-		for zebra in popzebras:
-			zebra.move(matrix_resources, popzebras)
-			zebra.eat(matrix_resources, matrix_waste, models_resources)
-			zebra.live()
-			if zebra.clean():
-				popzebras.remove(zebra)
-			if zebra.is_dead:
-				nb_alive_zebras -= 1
+    count_iteration = 1
+    while(1):
+        print '################### ITERATION ', count_iteration, \
+                ' ########################'
+        count_iteration += 1
+        nb_alive_zebras = len(popzebras)
+        for zebra in popzebras:
+            zebra.move(matrix_resources, popzebras)
+            zebra.eat(matrix_resources, matrix_waste, models_resources)
+            zebra.live()
+            if zebra.clean():
+                popzebras.remove(zebra)
+            if zebra.is_dead:
+                nb_alive_zebras -= 1
                            
-			
-		for tiger in poptigers:
-			tiger.move(popzebras, poptigers)
-			tiger.eat(popzebras)
-			tiger.live()
-			if tiger.is_dead():
-				print "Snif snif, a tiger is dead"
-				poptigers.remove(tiger)
+        for tiger in poptigers:
+            tiger.move(popzebras, poptigers)
+            tiger.eat(popzebras)
+            tiger.live()
+            if tiger.is_dead():
+                print "Snif snif, a tiger is dead"
+                poptigers.remove(tiger)
 
-			
-		print nb_alive_zebras, 'zebras alive'
-		print len(poptigers), 'tigers alive'
+        print nb_alive_zebras, 'zebras alive'
+        print len(poptigers), 'tigers alive'
  
 
 main()
