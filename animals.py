@@ -66,12 +66,17 @@ class Animal:
         if self.nrj <= 0 or self.life_expect <= 0:
             self.die()
     
-    def make_waste(self, matrix_waste):
-		if (random.randint(1,10) == 1) and self.waste_level > 0 :
+    def make_waste(self, matrix_waste, waste_models):
+		if (random.randint(1,35) == 1) and self.waste_level > 0 :
+			if (self.pos[0], self.pos[1]) in waste_models.keys():
+				waste_models[(self.pos[0], self.pos[1])].axis += (0, 0, self.waste_level/100)
+			
+			else:
+				waste = cone(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5),
+							 axis=(0,0,self.waste_level/100), radius = 3,
+							 color = color.green)
+				waste_models[(self.pos[0], self.pos[1])] = waste
 			matrix_waste[self.pos[0]][self.pos[1]] += self.waste_level
-			waste = cone(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5),
-						 axis=(0,0,self.waste_level/100), radius = 3,
-						 color = color.green)
 			self.waste_level = 0
 			print 'OHOOOOO IL A FAIT CACA'
 			

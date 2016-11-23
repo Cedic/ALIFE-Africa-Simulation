@@ -117,7 +117,7 @@ def main():
             zebra.move(matrix_resources, popzebras)
             zebra.eat(matrix_resources, matrix_waste, models_resources)
             zebra.live()
-            zebra.make_waste(matrix_waste)
+            zebra.make_waste(matrix_waste, models_waste)
             if zebra.clean():
                 popzebras.remove(zebra)
             if zebra.is_dead():
@@ -127,7 +127,7 @@ def main():
             tiger.move(popzebras, poptigers)
             tiger.eat(popzebras)
             tiger.live()
-            tiger.make_waste(matrix_waste)
+            tiger.make_waste(matrix_waste, models_waste)
             if tiger.is_dead():
                 print "Snif snif, a tiger is dead"
                 poptigers.remove(tiger)
