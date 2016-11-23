@@ -49,7 +49,8 @@ class Animal:
         self.waste_level = 0
 
         # Graphic model
-        self.model = sphere(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF,5), radius=VCOEFF/2)
+        self.model = box(pos=(self.pos[0]*VCOEFF - 5, self.pos[1]*VCOEFF -5, 10), 
+                            length=10, height=10, width = 10)
 
     def alive(self):
         return self.nrj > 0
@@ -124,7 +125,9 @@ class Animal:
 class Zebra(Animal):
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
-        self.model.color =(color.blue)
+        dna = dna_to_int(dna)
+        self.model.color = color.blue
+        #~ self.model.material=textures_zebra[dna]
         
     def move(self, mat, popzebras):
         # Look for point with most food
@@ -212,7 +215,9 @@ class Zebra(Animal):
 class Tiger(Animal):
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
-        self.model.color=color.red
+        dna = dna_to_int(dna)
+        self.model.color = color.red
+        #~ self.model.material=textures_tiger[dna]
     
     def move(self, popzebras, poptigers):
         # Look for point with most food
