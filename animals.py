@@ -16,19 +16,30 @@ def random_dna():
         dna.append(randint(0,1))
     return dna
 
+def random_pos():
+    return [randint(0,SIZE_AFRICA-1), randint(0,SIZE_AFRICA-1)]
+
+def is_neighbour(ani1, ani2):
+    if abs(ani1.pos[0] - ani2.pos[0]) <= 2 and \
+       abs(ani1.pos[1] - ani2.pos[1]) <= 2:
+        return True
+    else:
+        return False
+
+
 
 ##############################################################################
 
 
 # Classes
 class Animal:
-    def __init__(self, dna):
+    def __init__(self, dna, pos):
         self.dna = dna
-
-        self.pos = [randint(0,SIZE_AFRICA), randint(0,SIZE_AFRICA)]
+        self.pos = pos
         self.nrj_max = 250 + randint(-50,50)
         self.nrj = self.nrj_max/2
         self.life_expect = 1000 + randint(-200,200) # In number of iterations
+        self.desire = randint(20,50)
 
         dnaint = dna_to_int(self.dna)
         self.speed = dnaint + 1
@@ -43,10 +54,27 @@ class Animal:
     def alive(self):
         return self.nrj > 0
 
-    def reproduct(self, animal2):
+    def reproduct(self, pop):
+        libido = self.desire
+        child_dna = None
+        if self.nrj < self.food_eaten*4:
+            libido /= 2
+        # TODO penalty on libido if tiger
+        for ani in pop:
+            if not ani.is_dead():
+                if is_neighbour(self, ani):
+                    libido += ani.desire
+                    libido -= abs(dna_to_int(self.dna) - dna_to_int(ani.dna))*4
+                    if libido > 150:
+                        self.desire = 0
+                        child_dna = self.crossover(ani)
+                        break
+        return child_dna
+
+    def crossover(self, animal2):
         dim = len(self.dna)
         new_dna = []
-        fixed_point = randint(0,dim)
+        fixed_point = randint(0,dim-1)
         for i in range(dim):
             if i < fixed_point:
                 new_dna.append(self.dna[i])
@@ -94,8 +122,8 @@ class Animal:
 ##############################################################################
 
 class Zebra(Animal):
-    def __init__(self,dna):
-        Animal.__init__(self,dna)
+    def __init__(self,dna,pos):
+        Animal.__init__(self,dna,pos)
         self.model.color =(color.blue)
         
     def move(self, mat, popzebras):
@@ -182,8 +210,8 @@ class Zebra(Animal):
 ##############################################################################
 
 class Tiger(Animal):
-    def __init__(self,dna):
-        Animal.__init__(self,dna)
+    def __init__(self,dna,pos):
+        Animal.__init__(self,dna,pos)
         self.model.color=color.red
     
     def move(self, popzebras, poptigers):
@@ -244,7 +272,7 @@ class Tiger(Animal):
                 self.nrj += eaten
                 return True
                 break;
-		return False
+            return False
 
 
     def die(self):

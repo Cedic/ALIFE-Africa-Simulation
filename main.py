@@ -101,10 +101,10 @@ def main():
     poptigers = []
 	
     for i in range(15):
-        new_zebra = Zebra(random_dna())
+        new_zebra = Zebra(random_dna(), random_pos())
         popzebras.append(new_zebra)
     for i in range(15):
-        new_tiger = Tiger(random_dna())
+        new_tiger = Tiger(random_dna(), random_pos())
         poptigers.append(new_tiger)
 	
     count_iteration = 1
@@ -122,6 +122,10 @@ def main():
                 popzebras.remove(zebra)
             if zebra.is_dead():
                 nb_alive_zebras -= 1
+            # child_dna = zebra.reproduct(popzebras)
+            # if child_dna != None:
+            #     popzebras.append(Zebra(child_dna, zebra.pos))
+            
                            
         for tiger in poptigers:
             tiger.move(popzebras, poptigers)
@@ -131,6 +135,10 @@ def main():
             if tiger.is_dead():
                 print "Snif snif, a tiger is dead"
                 poptigers.remove(tiger)
+            # child_dna = tiger.reproduct(poptigers)
+            # if child_dna != None:
+            #     poptigers.append(Tiger(child_dna, tiger.pos))
+
 
         print nb_alive_zebras, 'zebras alive'
         print len(poptigers), 'tigers alive'
