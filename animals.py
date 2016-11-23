@@ -35,6 +35,7 @@ class Animal:
         self.vision = dnaint*2 + 1
         self.food_eaten = dnaint/2 + 1
         self.nrj_consum = float(dnaint)/4 + 1
+        self.waste_level = 0
 
         # Graphic model
         self.model = sphere(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF,5), radius=VCOEFF/2)
@@ -65,6 +66,16 @@ class Animal:
         if self.nrj <= 0 or self.life_expect <= 0:
             self.die()
     
+    def make_waste(self, matrix_waste):
+		if (random.randint(1,10) == 1) and self.waste_level > 0 :
+			matrix_waste[self.pos[0]][self.pos[1]] += self.waste_level
+			waste = cone(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5),
+						 axis=(0,0,self.waste_level/100), radius = 3,
+						 color = color.green)
+			self.waste_level = 0
+			print 'OHOOOOO IL A FAIT CACA'
+			
+		
     def is_dead(self):
         return self.speed <= 0
 
@@ -140,12 +151,15 @@ class Zebra(Animal):
         if mat_food[i][j] > 0:
             eaten = min(mat_food[i][j], self.food_eaten)
             mat_food[i][j] -= eaten
-            mat_waste[i][j] += eaten
+            self.waste_level += eaten
             self.nrj += eaten
             dict_resources[(i, j)].axis -= (0,0,eaten)
             if mat_food[i][j] <= 0:
                 dict_resources[(i, j)].visible = False
                 del dict_resources[(i, j)]
+            return True
+        else:
+			return False
 
     def die(self):
         # When a zebra dies, it stops moving but stays as food for tigers
@@ -220,9 +234,12 @@ class Tiger(Animal):
             if self.pos == zeb.pos:
                 zeb.die()
                 eaten = min(self.food_eaten, zeb.nrj)
+                self.waste_level += eaten
                 zeb.nrj -= eaten
                 self.nrj += eaten
+                return True
                 break;
+		return False
 
 
     def die(self):

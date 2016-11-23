@@ -91,7 +91,8 @@ def main():
 
 	# Initialization of the simulation field
     matrix_resources = generate_mat(SIZE_AFRICA)
-    matrix_resources, models_resources = generate_resources(matrix_resources, RESOURCES_CENTERS)													  
+    matrix_resources, models_resources = generate_resources(matrix_resources, RESOURCES_CENTERS)
+    models_waste={}													  
     matrix_waste = generate_mat(SIZE_AFRICA)
     generate_floor()
 	
@@ -116,6 +117,7 @@ def main():
             zebra.move(matrix_resources, popzebras)
             zebra.eat(matrix_resources, matrix_waste, models_resources)
             zebra.live()
+            zebra.make_waste(matrix_waste)
             if zebra.clean():
                 popzebras.remove(zebra)
             if zebra.is_dead:
@@ -125,6 +127,7 @@ def main():
             tiger.move(popzebras, poptigers)
             tiger.eat(popzebras)
             tiger.live()
+            tiger.make_waste(matrix_waste)
             if tiger.is_dead():
                 print "Snif snif, a tiger is dead"
                 poptigers.remove(tiger)
