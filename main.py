@@ -118,7 +118,7 @@ def main():
             zebra.live()
             if zebra.clean():
                 popzebras.remove(zebra)
-            if zebra.is_dead:
+            if zebra.is_dead():
                 nb_alive_zebras -= 1
                            
         for tiger in poptigers:
