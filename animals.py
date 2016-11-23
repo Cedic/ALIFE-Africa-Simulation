@@ -67,6 +67,7 @@ class Animal:
                     libido -= abs(dna_to_int(self.dna) - dna_to_int(ani.dna))*4
                     if libido > 150:
                         self.desire = 0
+                        ani.desire = 0
                         child_dna = self.crossover(ani)
                         break
         return child_dna

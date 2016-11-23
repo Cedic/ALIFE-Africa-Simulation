@@ -106,13 +106,16 @@ def main():
     for i in range(15):
         new_tiger = Tiger(random_dna(), random_pos())
         poptigers.append(new_tiger)
-	
+
+
+    # Main Loop
     count_iteration = 1
     while(1):
         print '################### ITERATION ', count_iteration, \
                 ' ########################'
         count_iteration += 1
         nb_alive_zebras = len(popzebras)
+        newzebras = []
         for zebra in popzebras:
             zebra.move(matrix_resources, popzebras)
             zebra.eat(matrix_resources, matrix_waste, models_resources)
@@ -122,11 +125,26 @@ def main():
                 popzebras.remove(zebra)
             if zebra.is_dead():
                 nb_alive_zebras -= 1
-            # child_dna = zebra.reproduct(popzebras)
-            # if child_dna != None:
-            #     popzebras.append(Zebra(child_dna, zebra.pos))
-            
-                           
+            child_dna = zebra.reproduct(popzebras)
+            if child_dna != None:
+                print zebra.pos
+                newzebras.append(Zebra(child_dna, zebra.pos))
+
+        # for zeb in newzebras:
+        #     print "pos", zeb.pos
+        #     print "dna", zeb.dna
+        #     print "nrj", zeb.nrj
+        #     print "nrj_max", zeb.nrj_max
+        #     print "life_expect", zeb.life_expect
+        #     print "desire", zeb.desire
+        #     print "speed", zeb.speed
+        #     print "vision", zeb.vision
+        #     print "food_eaten", zeb.food_eaten
+        #     print "nrj_consum", zeb.nrj_consum
+        #     print "waste_level", zeb.waste_level
+        #     popzebras.append(zeb)
+
+        newtigers = []
         for tiger in poptigers:
             tiger.move(popzebras, poptigers)
             tiger.eat(popzebras)
@@ -135,11 +153,13 @@ def main():
             if tiger.is_dead():
                 print "Snif snif, a tiger is dead"
                 poptigers.remove(tiger)
-            # child_dna = tiger.reproduct(poptigers)
-            # if child_dna != None:
-            #     poptigers.append(Tiger(child_dna, tiger.pos))
+            child_dna = tiger.reproduct(poptigers)
+            if child_dna != None:
+                newtigers.append(Tiger(child_dna, tiger.pos))
 
-
+        # for tig in newtigers:
+        #     poptigers.append(tig)
+            
         print nb_alive_zebras, 'zebras alive'
         print len(poptigers), 'tigers alive'
  
