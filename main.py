@@ -79,7 +79,7 @@ def generate_resources(mat, puntos):
 def generate_floor():
     floor = box (pos=(SIZE_AFRICA*VCOEFF/2,SIZE_AFRICA*VCOEFF/2,-10), 
                  length=SIZE_AFRICA*VCOEFF + 10, height=SIZE_AFRICA*VCOEFF +10,
-                 width=10, material = materials.marble, color = color.orange)
+                 width=10, material = materials.marble, color = color.green)
 
 
 def main(): 
