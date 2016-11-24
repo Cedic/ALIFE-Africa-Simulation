@@ -49,8 +49,9 @@ class Animal:
         self.waste_level = 0
 
         # Graphic model
-        self.model = box(pos=(self.pos[0]*VCOEFF - 5, self.pos[1]*VCOEFF -5, 10), 
-                            length=10, height=10, width = 10)
+        self.model = box(pos=(self.pos[0]*VCOEFF - 5, self.pos[1]*VCOEFF -5, 10),
+                            rotate=(0,-45,0),
+                            length=8, height=18, width = 8)
 
     def alive(self):
         return self.nrj > 0
@@ -87,7 +88,7 @@ class Animal:
     def move_model(self, x, y):
         for i in range(VCOEFF):
             self.model.pos=(self.pos[0]+x, self.pos[1]+y, 5)
-            range(SIM_SPEED)
+            rate(SIM_SPEED)
 
     def live(self):
         self.nrj -= self.nrj_consum
@@ -104,7 +105,7 @@ class Animal:
 			else:
 				waste = cone(pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5),
 							 axis=(0,0,self.waste_level/100), radius = 3,
-							 color = color.green)
+							 color = (1,0.7,0.2))
 				waste_models[(self.pos[0], self.pos[1])] = waste
 			matrix_waste[self.pos[0]][self.pos[1]] += self.waste_level
 			self.waste_level = 0
@@ -127,7 +128,7 @@ class Zebra(Animal):
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
         dna = dna_to_int(dna)
-        self.model.color = color.blue
+        self.model.color = color.white
         #~ self.model.material=textures_zebra[dna]
         
     def move(self, mat, popzebras):
@@ -217,7 +218,7 @@ class Tiger(Animal):
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
         dna = dna_to_int(dna)
-        self.model.color = color.red
+        self.model.color = color.orange
         #~ self.model.material=textures_tiger[dna]
     
     def move(self, popzebras, poptigers):
