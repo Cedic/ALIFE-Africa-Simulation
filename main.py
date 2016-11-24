@@ -127,22 +127,11 @@ def main():
                 nb_alive_zebras -= 1
             child_dna = zebra.reproduct(popzebras)
             if child_dna != None:
-                print zebra.pos
-                newzebras.append(Zebra(child_dna, zebra.pos))
+                newzebras.append(Zebra(child_dna, list(zebra.pos)))
 
-        # for zeb in newzebras:
-        #     print "pos", zeb.pos
-        #     print "dna", zeb.dna
-        #     print "nrj", zeb.nrj
-        #     print "nrj_max", zeb.nrj_max
-        #     print "life_expect", zeb.life_expect
-        #     print "desire", zeb.desire
-        #     print "speed", zeb.speed
-        #     print "vision", zeb.vision
-        #     print "food_eaten", zeb.food_eaten
-        #     print "nrj_consum", zeb.nrj_consum
-        #     print "waste_level", zeb.waste_level
-        #     popzebras.append(zeb)
+        for zeb in newzebras:
+            print "UN BEAU BEBE !!!!!"
+            popzebras.append(zeb)
 
         newtigers = []
         for tiger in poptigers:
