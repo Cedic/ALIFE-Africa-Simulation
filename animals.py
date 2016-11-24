@@ -4,6 +4,7 @@ from constants import *
 from visual import * 
 from textures import *
 import Image
+from time import sleep
 
 # Functions
 def dna_to_int(dna):
@@ -50,8 +51,7 @@ class Animal:
 
         # Graphic model
         self.model = box(pos=(self.pos[0]*VCOEFF - 5, self.pos[1]*VCOEFF -5, 10),
-                            rotate=(0,-45,0),
-                            length=8, height=18, width = 8)
+                              length=8, height = 8, width = 8)
 
     def alive(self):
         return self.nrj > 0
@@ -88,7 +88,6 @@ class Animal:
     def move_model(self, x, y):
         for i in range(VCOEFF):
             self.model.pos=(self.pos[0]+x, self.pos[1]+y, 5)
-            rate(SIM_SPEED)
 
     def live(self):
         self.nrj -= self.nrj_consum
