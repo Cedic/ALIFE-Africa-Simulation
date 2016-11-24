@@ -144,7 +144,7 @@ def main():
                 poptigers.remove(tiger)
             child_dna = tiger.reproduct(poptigers)
             if child_dna != None:
-                newtigers.append(Tiger(child_dna, tiger.pos))
+                newtigers.append(Tiger(child_dna, list(tiger.pos)))
 
         for tig in newtigers:
             print "UN BEAU BEBE TIGRE !!!!!"
