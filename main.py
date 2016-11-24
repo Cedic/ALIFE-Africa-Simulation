@@ -130,7 +130,7 @@ def main():
                 newzebras.append(Zebra(child_dna, list(zebra.pos)))
 
         for zeb in newzebras:
-            print "UN BEAU BEBE !!!!!"
+            print "UN BEAU BEBE ZEBRE !!!!!"
             popzebras.append(zeb)
 
         newtigers = []
@@ -146,8 +146,9 @@ def main():
             if child_dna != None:
                 newtigers.append(Tiger(child_dna, tiger.pos))
 
-        # for tig in newtigers:
-        #     poptigers.append(tig)
+        for tig in newtigers:
+            print "UN BEAU BEBE TIGRE !!!!!"
+            poptigers.append(tig)
             
         print nb_alive_zebras, 'zebras alive'
         print len(poptigers), 'tigers alive'
