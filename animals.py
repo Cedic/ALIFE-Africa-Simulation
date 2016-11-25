@@ -35,6 +35,7 @@ def is_neighbour(ani1, ani2):
 # Classes
 class Animal:
     def __init__(self, dna, pos):
+        self.animal_name =''
         self.dna = dna
         self.pos = pos
         self.nrj_max = 250 + randint(-50,50)
@@ -63,15 +64,18 @@ class Animal:
             libido /= 2
         # TODO penalty on libido if tiger
         for ani in pop:
-            if not ani.is_dead():
-                if is_neighbour(self, ani):
-                    libido += ani.desire
-                    libido -= abs(dna_to_int(self.dna) - dna_to_int(ani.dna))*4
-                    if libido > 150:
-                        self.desire = 0
-                        ani.desire = 0
-                        child_dna = self.crossover(ani)
-                        break
+            if ani.id != self.id:
+                if not ani.is_dead():
+                    if is_neighbour(self, ani):
+                        libido += ani.desire
+                        libido -= abs(dna_to_int(self.dna) - dna_to_int(ani.dna))*4
+                        if libido > 150:
+                            self.desire = 0
+                            ani.desire = 0
+                            child_dna = self.crossover(ani)
+                            break
+        if child_dna !=None:
+            print self.animal_name, self.id,' DNA ',self.dna,' and ',ani.animal_name, ani.id,'DNA', ani.dna,'had a child!'
         return child_dna
 
     def crossover(self, animal2):
@@ -126,6 +130,7 @@ class Zebra(Animal):
     class_counter = 0
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
+        self.animal_name = 'Zebra'
         dna = dna_to_int(dna)
         self.death = False
         self.death_by_tiger = False
@@ -133,6 +138,7 @@ class Zebra(Animal):
         self.id = Zebra.class_counter
         Zebra.class_counter +=1
         #~ self.model.material=textures_zebra[dna]
+        print 'Zebra', self.id, 'DNA', self.dna, 'appeared !'
         
     def move(self, mat, popzebras, poptigers):
         # Look for point with most food
@@ -226,12 +232,14 @@ class Tiger(Animal):
     class_counter=0
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
+        self.animal_name = 'Tiger'
         dna = dna_to_int(dna)
         self.model.color = color.orange
         self.id = Tiger.class_counter
         Tiger.class_counter += 1
         
         #~ self.model.material=textures_tiger[dna]
+        print 'Tiger', self.id, 'DNA', self.dna, 'appeared !'
     
     def move(self, popzebras, poptigers):
         # Look for point with most food
