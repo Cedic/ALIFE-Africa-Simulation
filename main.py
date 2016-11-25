@@ -113,7 +113,7 @@ def main():
     popzebras = []
     poptigers = []
 	
-    for i in range(15):
+    for i in range(30):
         new_zebra = Zebra(random_dna(), random_pos())
         popzebras.append(new_zebra)
     for i in range(15):
@@ -129,9 +129,9 @@ def main():
         # sleep(0.02)
 
         # Regenerate resources
-        if count_iteration % 100 == 0:
+        if count_iteration % 200 == 0:
             generate_resources(matrix_resources, models_resources, BOTTOMLEFT_RES)
-        elif count_iteration % 50 == 0:
+        elif count_iteration % 100 == 0:
             generate_resources(matrix_resources,models_resources, UPRIGHT_RES)
 
         print '################### ITERATION ', count_iteration, \
@@ -173,6 +173,9 @@ def main():
             
         print nb_alive_zebras, 'zebras alive'
         print len(poptigers), 'tigers alive'
+        
+        if STEP_MODE and count_iteration%STEP_RANGE == 0:
+            step = raw_input('Press enter to continue')
  
 
 main()
