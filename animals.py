@@ -123,10 +123,15 @@ class Animal:
 ##############################################################################
 
 class Zebra(Animal):
+    class_counter = 0
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
         dna = dna_to_int(dna)
+        self.death = False
+        self.death_by_tiger = False
         self.model.color = color.white
+        self.id = Zebra.class_counter
+        Zebra.class_counter +=1
         #~ self.model.material=textures_zebra[dna]
         
     def move(self, mat, matwaste, popzebras, poptigers):
@@ -185,6 +190,7 @@ class Zebra(Animal):
             self.pos[1] += movy
             self.move_model(movx, movy)
             self.model.pos=(self.pos[0]*VCOEFF, self.pos[1]*VCOEFF, 5)
+             
             
 
     def is_alone(self, popzebras):
@@ -214,6 +220,9 @@ class Zebra(Animal):
 
     def die(self):
         # When a zebra dies, it stops moving but stays as food for tigers
+        if not self.death:
+            print 'Snif snif, Zebra ', self.id, ' died.' 
+            self.death= True
         self.speed = -1
         self.model.color = color.black
         self.nrj = 10
@@ -228,10 +237,14 @@ class Zebra(Animal):
 ##############################################################################
 
 class Tiger(Animal):
+    class_counter=0
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
         dna = dna_to_int(dna)
         self.model.color = color.orange
+        self.id = Tiger.class_counter
+        Tiger.class_counter += 1
+        
         #~ self.model.material=textures_tiger[dna]
     
     def move(self, popzebras, poptigers):
@@ -286,6 +299,9 @@ class Tiger(Animal):
         for zeb in popzebras:
             if self.pos == zeb.pos:
                 zeb.die()
+                if not zeb.death_by_tiger:
+                    zeb.death_by_tiger = True
+                    print 'Tiger ', self.id, ' just killed Zebra', zeb.id
                 eaten = min(self.food_eaten, zeb.nrj)
                 self.waste_level += eaten
                 zeb.nrj -= eaten
@@ -297,6 +313,7 @@ class Tiger(Animal):
 
     def die(self):
         # TODO When a tiger dies, transform in waste
+        print 'Snif snif, Tiger ', self.id, ' died.' 
         self.speed = -1
         self.nrj = -1
         self.disappear()
