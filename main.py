@@ -50,9 +50,9 @@ def generate_a_resource(mat, x, y, n, dict_resources):
     return mat
 	
 	
-def generate_resources(mat, puntos):
+def generate_resources(mat,dict_resources, puntos):
 
-    dict_resources = {}
+    
     for pt in puntos:
         x = pt[0]
         y = pt[1]
@@ -76,7 +76,7 @@ def generate_resources(mat, puntos):
                     if mat[i][j] == 0:
                         mat = generate_a_resource(mat, i, j, 5, dict_resources)
 
-    return mat, dict_resources
+    return mat
 
 
 def generate_floor():
@@ -102,8 +102,9 @@ def main():
 	
 
 	# Initialization of the simulation field
+    models_resources = {}
     matrix_resources = generate_mat(SIZE_AFRICA)
-    matrix_resources, models_resources = generate_resources(matrix_resources, RESOURCES_CENTERS)
+    matrix_resources = generate_resources(matrix_resources, models_resources, RESOURCES_CENTERS)
     models_waste={}													  
     matrix_waste = generate_mat(SIZE_AFRICA)
     generate_floor()
@@ -129,10 +130,9 @@ def main():
 
         # Regenerate resources
         if count_iteration % 100 == 0:
-            generate_resources(matrix_resources, BOTTOMLEFT_RES)
+            generate_resources(matrix_resources, models_resources, UPRIGHT_RES)
         elif count_iteration % 50 == 0:
-            generate_resources(matrix_resources, UPRIGHT_RES)
-
+            generate_resources(matrix_resources,models_resources, BOTTOMLEFT_RES)
 
         print '################### ITERATION ', count_iteration, \
                 ' ########################'
