@@ -186,7 +186,7 @@ class Zebra(Animal):
         i, j = self.pos[0], self.pos[1]
         if mat_food[i][j] > 0:
             eaten = min(mat_food[i][j], self.food_eaten)
-            mat_food[i][j] -= eaten
+            mat_food[i][j] -= eaten*2
             self.waste_level += eaten
             self.nrj += eaten
             dict_resources[(i, j)].axis -= (0,0,eaten)
