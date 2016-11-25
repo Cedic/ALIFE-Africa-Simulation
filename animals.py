@@ -45,7 +45,7 @@ class Animal:
 
         dnaint = dna_to_int(self.dna)
         self.speed = dnaint + 1
-        self.vision = dnaint*2 + 1
+        self.vision = dnaint*4 + 1
         self.food_eaten = dnaint/2 + 1
         self.nrj_consum = float(dnaint)/4 + 1
         self.waste_level = 0
@@ -306,7 +306,10 @@ class Tiger(Animal):
 
     def eat(self, popzebras):
         for zeb in popzebras:
-            if self.pos == zeb.pos:
+            # if self.pos == zeb.pos:
+            if abs(self.pos[0] - zeb.pos[0]) <= 2 and \
+               abs(self.pos[1] - zeb.pos[1]) <= 2:
+                print "ZBRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                 zeb.die()
                 if not zeb.death_by_tiger:
                     zeb.death_by_tiger = True
