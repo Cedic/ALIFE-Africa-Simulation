@@ -123,10 +123,13 @@ class Animal:
 ##############################################################################
 
 class Zebra(Animal):
+    class_counter = 0
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
         dna = dna_to_int(dna)
         self.model.color = color.white
+        self.id = Zebra.class_counter
+        Zebra.class_counter +=1
         #~ self.model.material=textures_zebra[dna]
         
     def move(self, mat, popzebras):
@@ -214,10 +217,14 @@ class Zebra(Animal):
 ##############################################################################
 
 class Tiger(Animal):
+    class_counter=0
     def __init__(self,dna,pos):
         Animal.__init__(self,dna,pos)
         dna = dna_to_int(dna)
         self.model.color = color.orange
+        self.id = Tiger.class_counter
+        Tiger.class_counter += 1
+        
         #~ self.model.material=textures_tiger[dna]
     
     def move(self, popzebras, poptigers):
