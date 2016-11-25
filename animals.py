@@ -140,7 +140,7 @@ class Zebra(Animal):
         #~ self.model.material=textures_zebra[dna]
         print 'Zebra', self.id, 'DNA', self.dna, 'appeared !'
         
-    def move(self, mat, popzebras, poptigers):
+    def move(self, mat, matwaste, popzebras, poptigers):
         # Look for point with most food
         best_point = [-1,-1]
         best_point_quality = 0
@@ -148,9 +148,23 @@ class Zebra(Animal):
             for j in range(self.pos[1]-self.vision, self.pos[1]+self.vision):
                 if i >= 0 and i < SIZE_AFRICA and \
                     j >= 0 and j < SIZE_AFRICA:
-                    if mat[i][j] > best_point_quality:
+                    current_quality = mat[i][j]
+                    # Lower quality if tiger nearby
+                    for tig in poptigers:
+                        if abs(tig.pos[0] - i <= 2) or \
+                           abs(tig.pos[1] - j <= 2):
+                            current_quality -= 20
+                    # Lower quality if waste nearby
+                    waste_near = 0
+                    for ii in range(i-2, i+2):
+                        for jj in range(j-2, j+2):
+                            if ii >= 0 and ii < SIZE_AFRICA and \
+                               jj >= 0 and jj < SIZE_AFRICA:
+                                waste_near += matwaste[ii][jj]
+                    current_quality -= waste_near
+                    if current_quality > best_point_quality:
                         best_point = [i,j]
-                        best_point_quality = mat[i][j]
+                        best_point_quality = current_quality
         # Move toward this point
         # TODO flee tiger
         # TODO flee waste
