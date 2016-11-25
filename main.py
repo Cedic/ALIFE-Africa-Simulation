@@ -173,6 +173,9 @@ def main():
             
         print nb_alive_zebras, 'zebras alive'
         print len(poptigers), 'tigers alive'
+        
+        if STEP_MODE and count_iteration%STEP_RANGE == 0:
+            step = raw_input('Press enter to continue')
  
 
 main()

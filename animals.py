@@ -111,7 +111,6 @@ class Animal:
 				waste_models[(self.pos[0], self.pos[1])] = waste
 			matrix_waste[self.pos[0]][self.pos[1]] += self.waste_level
 			self.waste_level = 0
-			print 'OHOOOOO IL A FAIT CACA'
 			
 		
     def is_dead(self):
