@@ -215,21 +215,23 @@ class Zebra(Animal):
 
     def eat(self, mat_food, mat_waste, dict_resources):
         i, j = self.pos[0], self.pos[1]
-        if mat_food[i][j] > 0:
-            eaten = min(mat_food[i][j], self.food_eaten)
-            mat_food[i][j] -= eaten*3
-            self.waste_level += eaten
-            self.nrj += eaten
-            dict_resources[(i, j)].axis -= (0,0,eaten)
-            if i >= 0 and i < SIZE_AFRICA and \
-               j >= 0 and j < SIZE_AFRICA:
-                if mat_food[i][j] <= 0:
-                    mat_food[i][j] = 0
-                    dict_resources[(i, j)].visible = False
-                    del dict_resources[(i, j)]
+        if i >= 0 and i < SIZE_AFRICA and \
+           j >= 0 and j < SIZE_AFRICA:
+            if mat_food[i][j] > 0:
+                eaten = min(mat_food[i][j], self.food_eaten)
+                mat_food[i][j] -= eaten*3
+                self.waste_level += eaten
+                self.nrj += eaten
+                dict_resources[(i, j)].axis -= (0,0,eaten)
+                if i >= 0 and i < SIZE_AFRICA and \
+                   j >= 0 and j < SIZE_AFRICA:
+                    if mat_food[i][j] <= 0:
+                        mat_food[i][j] = 0
+                        dict_resources[(i, j)].visible = False
+                        del dict_resources[(i, j)]
             return True
         else:
-			return False
+            return False
 
     def die(self):
         # When a zebra dies, it stops moving but stays as food for tigers
