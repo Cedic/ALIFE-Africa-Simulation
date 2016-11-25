@@ -133,7 +133,7 @@ def main():
     for i in range(30):
         new_zebra = Zebra(random_dna(), random_pos())
         popzebras.append(new_zebra)
-    for i in range(15):
+    for i in range(5):
         new_tiger = Tiger(random_dna(), random_pos())
         poptigers.append(new_tiger)
 
@@ -159,7 +159,8 @@ def main():
         newtigers = []
         for tiger in poptigers:
             tiger.move(popzebras, poptigers)
-            tiger.eat(popzebras)
+            if tiger.nrj < tiger.nrj_max:
+                tiger.eat(popzebras)
             tiger.live()
             tiger.make_waste(matrix_waste, models_waste)
             if tiger.is_dead():

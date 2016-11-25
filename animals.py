@@ -1,5 +1,5 @@
 # Import
-from random import randint
+from random import randint, random
 from constants import *
 from visual import * 
 from textures import *
@@ -140,6 +140,12 @@ class Zebra(Animal):
         print 'Zebra', self.id, 'DNA', self.dna, 'appeared !'
         
     def move(self, mat, matwaste, popzebras, poptigers):
+        # Dirty hack, die if near tiger
+        for tig in poptigers:
+            if tig.pos == self.pos and random.random() > 0.5:
+                self.die()
+                print 'Tiger ', tig.id, ' just killed Zebra', self.id
+        
         # Look for point with most food
         best_point = [-1,-1]
         best_point_quality = 0
@@ -231,9 +237,9 @@ class Zebra(Animal):
             print 'Snif snif, Zebra ', self.id, ' died.' 
             self.death= True
         self.speed = -1
-        self.model.material = None
-        self.model.color = color.black
-        self.nrj = 10
+        # self.model.material = None
+        # self.model.color = color.black
+        self.nrj = 0
 
     def clean(self):
         # TODO find better name
@@ -309,7 +315,6 @@ class Tiger(Animal):
             # if self.pos == zeb.pos:
             if abs(self.pos[0] - zeb.pos[0]) <= 2 and \
                abs(self.pos[1] - zeb.pos[1]) <= 2:
-                print "ZBRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                 zeb.die()
                 if not zeb.death_by_tiger:
                     zeb.death_by_tiger = True
