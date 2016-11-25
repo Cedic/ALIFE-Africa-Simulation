@@ -83,7 +83,16 @@ def generate_floor():
                  length=SIZE_AFRICA*VCOEFF + 10, height=SIZE_AFRICA*VCOEFF +10,
                  width=10, material = materials.marble, color = color.green)
 
-
+def flush_waste(matrix_waste, dict_waste):
+    for i in range(SIZE_AFRICA):
+        for j in range(SIZE_AFRICA):
+            if matrix_waste[i][j] !=0:
+                matrix_waste[i][j] -= WASTE_FLUSH_RATE
+                dict_waste[(i, j)].axis -= (0, 0, WASTE_FLUSH_RATE/WASTE_SCALE)
+                if matrix_waste[i][j] <= 0:
+                    matrix_waste[i][j] = 0
+                    dict_waste[(i, j)].visible = False
+                    del dict_waste[(i, j)]
 def main(): 
     # 3D Scene for VPython   
     scene = display(title='Africa',
@@ -147,7 +156,8 @@ def main():
             child_dna = tiger.reproduct(poptigers)
             if child_dna != None:
                 newtigers.append(Tiger(child_dna, list(tiger.pos)))
-
+        
+        flush_waste(matrix_waste, models_waste)
         for tig in newtigers:
             print "UN BEAU BEBE TIGRE !!!!!"
             poptigers.append(tig)
