@@ -6,6 +6,7 @@ from visual import *
 from constants import *
 import Image
 from animals import *
+from time import sleep
 
 # Func
 def generate_mat(size):
@@ -113,6 +114,9 @@ def main():
     # Main Loop
     count_iteration = 1
     while(len(poptigers) > 0 or len(popzebras) > 0):
+
+        # Slow the simulation
+        sleep(0.05)
 
         # Regenerate resources
         if count_iteration % 100 == 0:
