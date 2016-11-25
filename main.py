@@ -126,7 +126,7 @@ def main():
     matrix_waste = generate_mat(SIZE_AFRICA)
     generate_floor()
 	
-	# Initialization of populations
+    # Initialization of populations
     popzebras = []
     poptigers = []
 	
@@ -154,6 +154,25 @@ def main():
         print '################### ITERATION ', count_iteration, \
                 ' ########################'
         count_iteration += 1
+
+
+        newtigers = []
+        for tiger in poptigers:
+            tiger.move(popzebras, poptigers)
+            tiger.eat(popzebras)
+            tiger.live()
+            tiger.make_waste(matrix_waste, models_waste)
+            if tiger.is_dead():
+                poptigers.remove(tiger)
+            child_dna = tiger.reproduct(poptigers)
+            if child_dna != None:
+                newtigers.append(Tiger(child_dna, list(tiger.pos)))
+        
+        for tig in newtigers:
+            poptigers.append(tig)
+
+
+        
         nb_alive_zebras = len(popzebras)
         newzebras = []
         for zebra in popzebras:
@@ -172,21 +191,8 @@ def main():
         for zeb in newzebras:
             popzebras.append(zeb)
 
-        newtigers = []
-        for tiger in poptigers:
-            tiger.move(popzebras, poptigers)
-            tiger.eat(popzebras)
-            tiger.live()
-            tiger.make_waste(matrix_waste, models_waste)
-            if tiger.is_dead():
-                poptigers.remove(tiger)
-            child_dna = tiger.reproduct(poptigers)
-            if child_dna != None:
-                newtigers.append(Tiger(child_dna, list(tiger.pos)))
-        
+
         flush_waste(matrix_waste, models_waste)
-        for tig in newtigers:
-            poptigers.append(tig)
             
         print nb_alive_zebras, 'zebras alive'
         print len(poptigers), 'tigers alive'

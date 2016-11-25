@@ -136,7 +136,7 @@ class Zebra(Animal):
         self.model.color = color.white
         self.id = Zebra.class_counter
         Zebra.class_counter +=1
-        #~ self.model.material=textures_zebra[dna]
+        self.model.material=textures_zebra[dna]
         print 'Zebra', self.id, 'DNA', self.dna, 'appeared !'
         
     def move(self, mat, matwaste, popzebras, poptigers):
@@ -149,10 +149,10 @@ class Zebra(Animal):
                     j >= 0 and j < SIZE_AFRICA:
                     current_quality = mat[i][j]
                     # Lower quality if tiger nearby
-                    for tig in poptigers:
-                        if abs(tig.pos[0] - i <= 2) or \
-                           abs(tig.pos[1] - j <= 2):
-                            current_quality -= 20
+                    # for tig in poptigers:
+                    #     if abs(tig.pos[0] - i <= 2) or \
+                    #        abs(tig.pos[1] - j <= 2):
+                    #         current_quality -= 20
                     # Lower quality if waste nearby
                     waste_near = 0
                     for ii in range(i-2, i+2):
@@ -231,6 +231,7 @@ class Zebra(Animal):
             print 'Snif snif, Zebra ', self.id, ' died.' 
             self.death= True
         self.speed = -1
+        self.model.material = None
         self.model.color = color.black
         self.nrj = 10
 
@@ -252,8 +253,7 @@ class Tiger(Animal):
         self.model.color = color.orange
         self.id = Tiger.class_counter
         Tiger.class_counter += 1
-        
-        #~ self.model.material=textures_tiger[dna]
+        self.model.material=textures_tiger[dna]
         print 'Tiger', self.id, 'DNA', self.dna, 'appeared !'
     
     def move(self, popzebras, poptigers):
