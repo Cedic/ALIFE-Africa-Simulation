@@ -57,25 +57,25 @@ def generate_resources(mat,dict_resources, puntos):
     for pt in puntos:
         x = pt[0]
         y = pt[1]
-        mat = generate_a_resource(mat, x, y, 50, dict_resources)
-        for i in range(x-1,x+2):
-            for j in range(y-1,y+2):
+        mat = generate_a_resource(mat, x, y, 20, dict_resources)
+        for i in range(x-2,x+2):
+            for j in range(y-2,y+2):
                 if [i,j] != [x,y]:
-                    mat = generate_a_resource(mat, i, j, 45, dict_resources)
-        for i in range(x-2,x+3):
-            for j in range(y-2,y+3):
+                    mat = generate_a_resource(mat, i, j, 16, dict_resources)
+        for i in range(x-4,x+4):
+            for j in range(y-4,y+4):
                 if mat[i][j] == 0:
-                    mat = generate_a_resource(mat, i, j, 35, dict_resources)
-        for i in range(x-3,x+4):
-            for j in range(y-3,y+4):
+                    mat = generate_a_resource(mat, i, j, 12, dict_resources)
+        for i in range(x-6,x+6):
+            for j in range(y-6,y+6):
                 if inmat(i,j,mat):
                     if mat[i][j] == 0:
-                        mat = generate_a_resource(mat, i, j, 20, dict_resources)
-        for i in range(x-4,x+5):
-            for j in range(y-4,y+5):
+                        mat = generate_a_resource(mat, i, j, 8, dict_resources)
+        for i in range(x-8,x+8):
+            for j in range(y-8,y+8):
                 if inmat(i,j,mat):
                     if mat[i][j] == 0:
-                        mat = generate_a_resource(mat, i, j, 5, dict_resources)
+                        mat = generate_a_resource(mat, i, j, 4, dict_resources)
 
     return mat
 
@@ -130,7 +130,7 @@ def main():
     popzebras = []
     poptigers = []
 	
-    for i in range(15):
+    for i in range(30):
         new_zebra = Zebra(random_dna(), random_pos())
         popzebras.append(new_zebra)
     for i in range(15):
@@ -143,7 +143,7 @@ def main():
     while(len(poptigers) > 0 or len(popzebras) > 0):
 
         # Slow the simulation
-        sleep(0.05)
+        # sleep(0.02)
 
         # Regenerate resources
         if count_iteration % 100 == 0:
