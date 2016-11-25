@@ -129,7 +129,7 @@ class Zebra(Animal):
         self.model.color = color.white
         #~ self.model.material=textures_zebra[dna]
         
-    def move(self, mat, popzebras):
+    def move(self, mat, popzebras, poptigers):
         # Look for point with most food
         best_point = [-1,-1]
         best_point_quality = 0

@@ -140,7 +140,7 @@ def main():
         nb_alive_zebras = len(popzebras)
         newzebras = []
         for zebra in popzebras:
-            zebra.move(matrix_resources, popzebras)
+            zebra.move(matrix_resources, popzebras, poptiers)
             zebra.eat(matrix_resources, matrix_waste, models_resources)
             zebra.live()
             zebra.make_waste(matrix_waste, models_waste)
