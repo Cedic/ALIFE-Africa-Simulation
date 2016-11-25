@@ -129,9 +129,9 @@ def main():
 
         # Regenerate resources
         if count_iteration % 100 == 0:
-            generate_resources(matrix_resources, UPRIGHT_RES)
-        elif count_iteration % 100 == 0:
             generate_resources(matrix_resources, BOTTOMLEFT_RES)
+        elif count_iteration % 50 == 0:
+            generate_resources(matrix_resources, UPRIGHT_RES)
 
 
         print '################### ITERATION ', count_iteration, \
