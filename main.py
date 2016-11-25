@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from visual import * 
 from constants import *
+from tree import *
 import Image
 from animals import *
 from time import sleep
@@ -100,7 +101,23 @@ def main():
                     x=0, y=0, width=600, height=600,
                     center = (SIZE_AFRICA*VCOEFF/2, SIZE_AFRICA*VCOEFF/2,70), background=(0,0,0))
 	
-
+    #~ scene.visible=0
+    #~ fr=frame(pos=(0,-0.8,0))
+    #~ tr=tree(fr,vector(0,0,0), vector(0,0.8,0), 0.075, (0.8,0.4,0.1), 0.6, 0.6, pi/3.0, 5)
+    #~ scene.visible=1
+#~ 
+    #~ f=3
+    #~ ai=0
+    #~ aim=f*100
+    #~ while 1:
+        #~ rate(25)
+        #~ a=(ai-aim/2)*pi/50.0
+        #~ ai+=f
+        #~ if ai>=aim: ai=0
+        #~ for i in range(len(leaves)/20):
+            #~ for l in (leaves,fruits):
+                #~ o=choice(l)
+                #~ o.rotate(axis=o.up, angle=(a-pi)/200.0)
 	# Initialization of the simulation field
     models_resources = {}
     matrix_resources = generate_mat(SIZE_AFRICA)

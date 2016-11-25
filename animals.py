@@ -225,7 +225,7 @@ class Zebra(Animal):
 
     def die(self):
         # When a zebra dies, it stops moving but stays as food for tigers
-        if not self.death:
+        if not self.death :
             print 'Snif snif, Zebra ', self.id, ' died.' 
             self.death= True
         self.speed = -1
