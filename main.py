@@ -41,9 +41,11 @@ def inmat(i,j,mat):
 def generate_a_resource(mat, x, y, n, dict_resources):
 	
     mat[x][y] = calc_quantity(n)
-    resource_model = cylinder(pos=(x*VCOEFF,y*VCOEFF,0), axis=(0,0,n),
-                              radius=3, material = materials.wood)
-    dict_resources[(x,y)] = resource_model
+    if (x,y) not in dict_resources.keys():
+        resource_model = cylinder(pos=(x*VCOEFF,y*VCOEFF,0), axis=(0,0,n),
+                                  radius=3, material = materials.wood)
+    
+        dict_resources[(x,y)] = resource_model
     return mat
 	
 	
@@ -110,7 +112,7 @@ def main():
 
     # Main Loop
     count_iteration = 1
-    while(1):
+    while(poptigers or popzebras):
         print '################### ITERATION ', count_iteration, \
                 ' ########################'
         count_iteration += 1
