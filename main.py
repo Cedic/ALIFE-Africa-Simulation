@@ -140,7 +140,7 @@ def main():
         nb_alive_zebras = len(popzebras)
         newzebras = []
         for zebra in popzebras:
-            zebra.move(matrix_resources, popzebras, poptiers)
+            zebra.move(matrix_resources, popzebras, poptigers)
             zebra.eat(matrix_resources, matrix_waste, models_resources)
             zebra.live()
             zebra.make_waste(matrix_waste, models_waste)
@@ -153,7 +153,6 @@ def main():
                 newzebras.append(Zebra(child_dna, list(zebra.pos)))
 
         for zeb in newzebras:
-            print "UN BEAU BEBE ZEBRE !!!!!"
             popzebras.append(zeb)
 
         newtigers = []
@@ -163,7 +162,6 @@ def main():
             tiger.live()
             tiger.make_waste(matrix_waste, models_waste)
             if tiger.is_dead():
-                print "Snif snif, a tiger is dead"
                 poptigers.remove(tiger)
             child_dna = tiger.reproduct(poptigers)
             if child_dna != None:
@@ -171,7 +169,6 @@ def main():
         
         flush_waste(matrix_waste, models_waste)
         for tig in newtigers:
-            print "UN BEAU BEBE TIGRE !!!!!"
             poptigers.append(tig)
             
         print nb_alive_zebras, 'zebras alive'
