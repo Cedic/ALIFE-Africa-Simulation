@@ -129,9 +129,9 @@ def main():
         # sleep(0.02)
 
         # Regenerate resources
-        if count_iteration % 200 == 0:
+        if count_iteration % 100 == 0:
             generate_resources(matrix_resources, models_resources, BOTTOMLEFT_RES)
-        elif count_iteration % 100 == 0:
+        elif count_iteration % 50 == 0:
             generate_resources(matrix_resources,models_resources, UPRIGHT_RES)
 
         print '################### ITERATION ', count_iteration, \
