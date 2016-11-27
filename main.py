@@ -142,7 +142,7 @@ def main():
     for i in range(30):
         new_zebra = Zebra(random_dna(), random_pos())
         popzebras.append(new_zebra)
-    for i in range(5):
+    for i in range(10):
         new_tiger = Tiger(random_dna(), random_pos())
         poptigers.append(new_tiger)
 
